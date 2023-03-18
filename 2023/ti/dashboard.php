@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['username'])){
+        header("refres:5;url=index.php");
+        die("Acesso Restrito");
+    }
+?>
 <!doctype html>
 <html lang="pt">
   <head>

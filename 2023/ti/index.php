@@ -8,14 +8,16 @@
     }
 */
     $username = "admin";
-    $password = "admin";
+    // $password = "admin"; password_hash($password, PASSWORD_DEFAULT);
+    $password = '$2y$10$dHakMEZFBrsC.IXCPUR6yOSO/QSsmIXKJjU/YrYWzU4nLbcW8IL7.';
     if (isset($_POST['username']) && isset($_POST['password'])){
-        if ($_POST['username'] == $username && $_POST['password'] == $password){
+        if ($_POST['username'] == $username && password_verify($_POST['password'], $password)){
             session_start();
             $_SESSION['username'] = $username;
             header("Location: dashboard.php");
         } else {
-            echo "<script>alert('Username ou password incorretos!')</script>";
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            echo "<script>alert($hash)</script>";
         }
     }
 ?>
@@ -29,7 +31,7 @@
 </head>
 <body>
     <div class="container">
-        <form class="formLab" method="post">
+        <form class="TIform" method="post">
             <a href="index.php"><img src="img/estg_h.png" class="img-fluid"></a>
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
